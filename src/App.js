@@ -8,7 +8,8 @@ import RouteRecommend from "./pages/RouteRecommend";
 import Carpooling from "./pages/Carpooling";
 import Redeem from "./pages/Redeem";
 import Community from "./pages/Community";
-
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 function App() {
   return (
     <Router>
