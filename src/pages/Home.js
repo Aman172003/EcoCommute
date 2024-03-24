@@ -2,8 +2,8 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div>
-      
+    <div>    
+    <button className="custom-button">Click me</button>
     </div>
   )
 }

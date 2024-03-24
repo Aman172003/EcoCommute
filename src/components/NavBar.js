@@ -10,50 +10,47 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-10">
+    <nav className="bg-white shadow-lg sticky top-0 z-10 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <img
-              className="block lg:hidden h-12 w-auto"
-              src={logo} 
-              alt="Logo"
-            />
-            <img
-              className="hidden lg:block h-12 w-auto"
-              src={logo}
-              alt="Logo"
-            />
+            <Link to="/" className="flex-shrink-0">
+              <img
+                className="h-12 w-auto"
+                src={logo}
+                alt="Logo"
+              />
+            </Link>
           </div>
           <div className="hidden lg:flex lg:items-center lg:justify-end">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 to="/route-recommendation"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
               >
                 Route Recommendation
               </Link>
               <Link
                 to="/car-pooling"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
               >
                 Car Pooling
               </Link>
               <Link
                 to="/leaderboard"
-                className="text-gray-900 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
               >
                 Leaderboard
               </Link>
               <Link
                 to="/redeem"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
               >
                 Redeem
               </Link>
               <Link
                 to="/community"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
               >
                 Community
               </Link>
@@ -110,31 +107,31 @@ const Navbar = () => {
           <div className="px-2 pt-2 pb-3 space-y-1">
             <Link
               to="/route-recommendation"
-              className="text-gray-900 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
             >
               Route Recommendation
             </Link>
             <Link
               to="/car-pooling"
-              className="text-gray-900 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
             >
               Car Pooling
             </Link>
             <Link
               to="/leaderboard"
-              className="text-gray-900 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
             >
               Leaderboard
             </Link>
             <Link
               to="/redeem"
-              className="text-gray-900 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
             >
               Redeem
             </Link>
             <Link
               to="/community"
-              className="text-gray-900 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
             >
               Community
             </Link>
