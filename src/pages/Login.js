@@ -26,14 +26,14 @@ const Login = () => {
       >
         <div className="flex flex-row items-center justify-center h-screen">
           <img
-            className=" w-56 cursor-pointer"
+            className="md:w-32 lg:w-56 cursor-pointer"
             src={logo}
             alt="Logo"
             onClick={(e) => navigate("/")}
           />
           <div
             onClick={() => navigate("/")}
-            className="text-green-800 text-6xl font-bold mt-5 ml-2 cursor-pointer"
+            className="text-green-800 text-4xl lg:text-6xl font-bold mt-5 ml-2 cursor-pointer"
           >
             EcoCommute
           </div>
@@ -41,7 +41,7 @@ const Login = () => {
       </div>
 
       {/* {RIGHT CONTENT} */}
-      <div className="flex md:w-1/2 mx-2 h-screen flex-col align-middle items-center justify-center">
+      <div className="flex w-screen md:w-1/2  h-screen flex-col align-middle items-center justify-center bg-gray-100">
         <div className="overflow-auto">
           <div className="flex flex-col justify-center items-center py-8 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md">
