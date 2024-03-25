@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
+import { BiChevronDown } from "react-icons/bi";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Signup = () => {
+  const cities = ["Bengaluru", "Delhi", "Mumbai", "Chennai", "Hydrabad"];
+  const [input, setInput] = useState("");
+  const [selected, setSelected] = useState("");
+  const [open, setOpen] = useState(false);
   return (
     <div className="h-screen bg-gray-100 overflow-auto">
       <nav className="bg-gray-100 py-4">
@@ -42,6 +48,72 @@ const Signup = () => {
                   />
                 </div>
               </div>
+
+              {/* dropdown to select the city */}
+
+              <div class="relative cursor-pointer">
+                <label
+                  for="cityDropdown"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  City
+                </label>
+                <div className="mt-1">
+                  <div
+                    onClick={() => setOpen(!open)}
+                    class={`bg-white w-full px-3 py-2 flex text-gray-500 border border-gray-300 items-center justify-between focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm rounded ${
+                      selected && "text-gray-900"
+                    }`}
+                    id="cityDropdown"
+                  >
+                    {selected ? selected : "Select City"}
+                    <BiChevronDown
+                      size={20}
+                      class={`${open && "rotate-180"}`}
+                    />
+                  </div>
+                  <ul
+                    class={`absolute mt-2 overflow-y-auto z-10 bg-white border border-gray-300 rounded shadow-md ${
+                      open ? "w-full max-h-60" : "max-h-0 hidden"
+                    }`}
+                  >
+                    <div class="flex items-center px-2 sticky top-0 bg-white">
+                      <AiOutlineSearch size={18} class="text-gray-300" />
+                      <input
+                        onChange={(e) => setInput(e.target.value)}
+                        type="text"
+                        value={input}
+                        placeholder="Enter City name"
+                        class="placeholder:text-gray-300 p-2 outline-none"
+                      />
+                    </div>
+                    {cities?.map((city) => (
+                      <li
+                        key={city}
+                        class={`p-2 text-sm hover:bg-[#5CD3AB] hover:text-white ${
+                          city?.toLowerCase() === selected?.toLowerCase() &&
+                          "bg-[#5CD3AB] text-white"
+                        } ${
+                          city?.toLowerCase().startsWith(input.toLowerCase())
+                            ? "block"
+                            : "hidden"
+                        }`}
+                        onClick={() => {
+                          if (city?.toLowerCase() !== selected.toLowerCase()) {
+                            setSelected(city);
+                            setOpen(false);
+                            setInput("");
+                          }
+                        }}
+                      >
+                        {city}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* end of dropdown */}
 
               <div>
                 <label
