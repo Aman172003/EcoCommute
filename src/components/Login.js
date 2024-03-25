@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/logo.png";
+import Signup from "./Signup";
 const colors = {
   primary: "#9BCF53",
   background: "#BFEA7C",
@@ -15,96 +16,135 @@ const Login = () => {
     maxWidth: "200px", // Set a maximum width for responsiveness
   };
   return (
-    <div className="w-full h-screen flex items-start">
-      <div className="flex w-1/2 h-screen" style={leftHalfStyle}>
-        <div className="w-1/2 h-screen flex items-center justify-center">
-          <img className="w-3/4" src={logo} alt="Logo" />
-        </div>
-        <div
-          className="text-green-800 text-3xl font-bold w-1/2 flex items-center justify-center"
-          style={logoStyle}
-        >
-          EcoCommute
-        </div>
+    <div className="w-full flex h-screen items-center justify-center">
+      {/* LEFT CONTENT */}
+      <div
+        className="flex w-1/2 h-screen hidden md:block overflow-hidden"
+        style={leftHalfStyle}
+      >
+        <div className="flex flex-row items-center justify-center h-screen">
+      <img className="w-60" src={logo} alt="Logo" />
+      <div className="text-green-800 text-3xl font-bold mt-5 ml-2">EcoCommute</div>
+    </div>
+
       </div>
 
-      {/* {right content} */}
+      {/* {RIGHT CONTENT} */}
+      <div className="flex md:w-1/2 mx-2 h-screen flex-col align-middle items-center justify-center">
+      <div className="overflow-auto">
 
-      <div className="flex flex-col h-screen p-6 items-center justify-center">
+      <div className="flex flex-col justify-center items-center py-8 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 className="mt-8 text-center text-2xl font-bold text-gray-900">
+          Sign In
+          </h2>
+          <p className="text-gray-500 text-xs">Sign in below to access your account</p>
+        </div>
+        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form className="space-y-6" action="#" method="POST">
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email address
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                    placeholder="Enter your email address"
+                  />
+                </div>
+              </div>
 
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                    placeholder="Enter your password"
+                  />
+                </div>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#32c896] hover:bg-[#5CD3AB] transition-all ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+            <div className="mt-6">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-gray-100 text-gray-500">Or</span>
+                </div>
+              </div>
 
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          
-
-          <div className="w-50 h-50 bg-gray-200 p-8">
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-              <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-green-900">
-                Sign in to your account
-              </h2>
-              <form className="space-y-6" action="#" method="POST">
+              <div className="mt-6 grid grid-cols-3 gap-3">
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                  <a
+                    href="#"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                   >
-                    Email address
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-800 sm:text-sm sm:leading-6"
-                      style={{ paddingLeft: "10px" }}
+                    <img
+                      className="h-5 w-5"
+                      src="https://www.svgrepo.com/show/512120/facebook-176.svg"
+                      alt=""
                     />
-                  </div>
+                  </a>
                 </div>
-
                 <div>
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-medium leading-6 text-green-900"
-                    >
-                      Password
-                    </label>
-                    <div className="text-sm">
-                      <a
-                        href="#"
-                        className="font-semibold text-green-800 hover:text-green-600"
-                      >
-                        Forgot password?
-                      </a>
-                    </div>
-                  </div>
-                  <div className="mt-2">
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="current-password"
-                      required
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                      style={{ paddingLeft: "10px" }}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md bg-green-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                  <a
+                    href="#"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                   >
-                    Sign in
-                  </button>
+                    <img
+                      className="h-5 w-5"
+                      src="https://www.svgrepo.com/show/513008/twitter-154.svg"
+                      alt=""
+                    />
+                  </a>
                 </div>
-              </form>
+                <div>
+                  <a
+                    href="#"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                  >
+                    <img
+                      className="h-6 w-6"
+                      src="https://www.svgrepo.com/show/506498/google.svg"
+                      alt=""
+                    />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   );
 };
