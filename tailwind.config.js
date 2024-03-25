@@ -15,6 +15,9 @@ module.exports = {
         bold: 700,
         
       },
+      colors: {
+        'custom-green': '#173308',
+      },
       gradientColorStops: theme => ({
         'blue-start': '#8feafe',
         'blue-end': '#a5ff6f',

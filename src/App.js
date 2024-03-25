@@ -21,6 +21,7 @@ function App() {
           <Route path="/car-pooling" element={<Carpooling />} />
           <Route path="/redeem" element={<Redeem />} />
           <Route path="/community" element={<Community />} />
+          
         </Routes>
       </div>
     </Router>
