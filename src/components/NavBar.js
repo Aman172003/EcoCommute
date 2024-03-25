@@ -15,11 +15,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0">
-              <img
-                className="h-12 w-auto"
-                src={logo}
-                alt="Logo"
-              />
+              <img className="h-12 w-auto" src={logo} alt="Logo" />
             </Link>
           </div>
           <div className="hidden lg:flex lg:items-center lg:justify-end">
@@ -53,6 +49,12 @@ const Navbar = () => {
                 className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
               >
                 Community
+              </Link>
+              <Link
+                to="/signup"
+                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
+              >
+                Sign Up
               </Link>
             </div>
           </div>

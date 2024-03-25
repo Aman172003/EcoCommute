@@ -2,35 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 /* index.css or any other CSS file */
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap");
 .arimo-regular {
-    font-family: "Arimo", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400; /* Regular weight */
-    font-style: normal;
-  }
-  
-.arimo-medium {
-    font-family: "Arimo", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500; 
-    font-style: normal;
-  }
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* Regular weight */
+  font-style: normal;
+}
 
+.arimo-medium {
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.px-py {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
 .custom-button {
-    background-image: linear-gradient(to right, #8feafe, #a5ff6f);
-    color: #173308;
-    font-weight: bold;
-    font-family: 'Arimo', sans-serif; /* Use Arimo font */
-    font-size: 1rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-.custom-button:hover {
-    background-image: linear-gradient(to right, #85d5f9, #9ae699);
+  background-image: linear-gradient(to right, #8feafe, #a5ff6f);
+  color: #173308;
+  font-weight: bold;
+  font-family: "Arimo", sans-serif; /* Use Arimo font */
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
-  
+
+.custom-button:hover {
+  background-image: linear-gradient(to right, #85d5f9, #9ae699);
+}
