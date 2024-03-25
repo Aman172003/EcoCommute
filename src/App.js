@@ -8,6 +8,7 @@ import RouteRecommend from "./pages/RouteRecommend";
 import Carpooling from "./pages/Carpooling";
 import Redeem from "./pages/Redeem";
 import Community from "./pages/Community";
+import Footer from "./components/Footer"
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 function App() {
@@ -21,8 +22,8 @@ function App() {
           <Route path="/car-pooling" element={<Carpooling />} />
           <Route path="/redeem" element={<Redeem />} />
           <Route path="/community" element={<Community />} />
-          
         </Routes>
+        <Footer/>
       </div>
     </Router>
   );
