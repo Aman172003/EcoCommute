@@ -14,7 +14,7 @@ const Leaderboard = () => {
 
   return (
     <div className="container mx-auto mt-8 flex flex-col items-center mb-8">
-      <h2 className="text-2xl text-custom-green font-bold mb-4">Leaderboard</h2>
+      <h2 className="text-4xl text-custom-green font-bold mb-4">Leaderboard</h2>
       <div className="w-full max-w-lg">
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
           <table className="w-full">

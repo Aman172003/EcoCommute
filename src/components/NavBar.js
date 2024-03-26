@@ -4,9 +4,14 @@ import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedLink, setSelectedLink] = useState(null);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLinkClick = (link) => {
+    setSelectedLink(link);
   };
 
   return (
@@ -22,38 +27,41 @@ const Navbar = () => {
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 to="/route-recommendation"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
-              >
+                className={`${selectedLink === "/route-recommendation"? "text-green-600": "text-gray-900 hover:text-green-600"
+                } px-3 py-2 rounded-md font-medium`}
+                onClick={() => handleLinkClick("/route-recommendation")}>
                 Route Recommendation
               </Link>
-              <Link
-                to="/car-pooling"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
-              >
+              <Link to="/car-pooling" className={`${selectedLink === "/car-pooling"? "text-green-600"
+                    : "text-gray-900 hover:text-green-600"
+                } px-3 py-2 rounded-md font-medium`}
+                onClick={() => handleLinkClick("/car-pooling")}>
                 Car Pooling
               </Link>
-              <Link
-                to="/leaderboard"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
-              >
+              <Link to="/leaderboard" className={`${selectedLink === "/leaderboard"? "text-green-600": "text-gray-900 hover:text-green-600"
+                } px-3 py-2 rounded-md font-medium`}onClick={() => handleLinkClick("/leaderboard")}>
                 Leaderboard
               </Link>
-              <Link
-                to="/redeem"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
-              >
+              <Link to="/redeem" className={`${selectedLink === "/redeem"? "text-green-600": "text-gray-900 hover:text-green-600"
+                } px-3 py-2 rounded-md font-medium`}
+                onClick={() => handleLinkClick("/redeem")}>
                 Redeem
               </Link>
               <Link
                 to="/community"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
+                className={`${
+                  selectedLink === "/community"
+                    ? "text-green-600"
+                    : "text-gray-900 hover:text-green-600"
+                } px-3 py-2 rounded-md font-medium`}
+                onClick={() => handleLinkClick("/community")}
               >
                 Community
               </Link>
-              <Link
-                to="/signup"
-                className="text-gray-900 hover:text-gray-900 px-3 py-2 rounded-md font-medium"
-              >
+              <Link to="/signup" className={`${selectedLink === "/signup"? "text-green-600"
+                    : "text-gray-900 hover:text-green-600"
+                } px-3 py-2 rounded-md font-medium`}
+                onClick={() => handleLinkClick("/signup")}>
                 Sign Up
               </Link>
             </div>
@@ -107,34 +115,19 @@ const Navbar = () => {
       {isOpen && (
         <div className="lg:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link
-              to="/route-recommendation"
-              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
-            >
+            <Link to="/route-recommendation" className="text-gray-900 hover:text-green-600 text-base font-medium block" >
               Route Recommendation
             </Link>
-            <Link
-              to="/car-pooling"
-              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
-            >
+            <Link to="/car-pooling" className="text-gray-900 hover:text-green-600 text-base font-medium block" >
               Car Pooling
             </Link>
-            <Link
-              to="/leaderboard"
-              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
-            >
+            <Link to="/leaderboard" className="text-gray-900 hover:text-green-600 text-base font-medium block">
               Leaderboard
             </Link>
-            <Link
-              to="/redeem"
-              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
-            >
+            <Link to="/redeem" className="text-gray-900 hover:text-green-600 text-base font-medium block" >
               Redeem
             </Link>
-            <Link
-              to="/community"
-              className="text-gray-900 hover:text-gray-900 text-base font-medium block"
-            >
+            <Link to="/community"  className="text-gray-900 hover:text-green-600 text-base font-medium block">
               Community
             </Link>
           </div>

@@ -82,7 +82,7 @@ const Footer = () => {
                     </a>
                 </div>
 
-                <div className="mb-4 px-24 font-sans font-bold" style={{ color: '#173308' }}>
+                <div className="mb-4 px-4 lg:px-24 font-sans font-bold" style={{ color: '#173308' }}>
                     <p>
                         EcoCommute is your go-to digital hub for sustainable transportation solutions. 
                         Designed with everyday commuters and eco-conscious individuals in mind, EcoCommute offers intuitive tools to simplify your local travel needs. 
