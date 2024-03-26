@@ -14,6 +14,7 @@ import Community from "./pages/Community";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Leaderboard from "./pages/Leaderboard";
 
 // Custom component to control the visibility of Navbar and Footer
 function NavigationControl() {
@@ -32,6 +33,7 @@ function NavigationControl() {
         <Route path="/community" element={<Community />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
       {!hideNavbarAndFooter && <Footer />}
     </React.Fragment>
