@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,38 @@ const colors = {
 
 const Login = () => {
   const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, password } = credentials;
+    const payload = {
+      email,
+      password,
+    };
+    const response = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    const json = await response.json();
+    console.log(json);
+    if (json.success) {
+      //save the auth token and redirect
+      localStorage.setItem("token", json.authToken);
+      console.log("Successfully Logged In");
+      navigate("/");
+    } else {
+      console.log("Invalid credentials");
+    }
+  };
+
+  const onChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
   const leftHalfStyle = {
     background: `linear-gradient(to right, ${colors.primary}, ${colors.background})`,
   };
@@ -26,14 +58,14 @@ const Login = () => {
       >
         <div className="flex flex-row items-center justify-center h-screen">
           <img
-            className="md:w-32 lg:w-56 cursor-pointer"
+            className="md:w-32 xl:w-56 cursor-pointer"
             src={logo}
             alt="Logo"
             onClick={(e) => navigate("/")}
           />
           <div
             onClick={() => navigate("/")}
-            className="text-green-800 text-4xl lg:text-6xl font-bold mt-5 ml-2 cursor-pointer"
+            className="text-green-800 text-4xl xl:text-6xl font-bold mt-5 ml-2 cursor-pointer"
           >
             EcoCommute
           </div>
@@ -54,7 +86,12 @@ const Login = () => {
             </div>
             <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
               <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                <form className="space-y-6" action="#" method="POST">
+                <form
+                  className="space-y-6"
+                  action="#"
+                  method="POST"
+                  onSubmit={handleSubmit}
+                >
                   <div>
                     <label
                       htmlFor="email"
@@ -67,6 +104,7 @@ const Login = () => {
                         id="email"
                         name="email"
                         type="email"
+                        onChange={onChange}
                         autoComplete="email"
                         required
                         className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
@@ -87,6 +125,7 @@ const Login = () => {
                         id="password"
                         name="password"
                         type="password"
+                        onChange={onChange}
                         autoComplete="current-password"
                         required
                         className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
@@ -99,7 +138,7 @@ const Login = () => {
                       type="submit"
                       className="custom-button px-4 py-2 group relative w-full flex justify-center"
                     >
-                      Login
+                      Sign in
                     </button>
                   </div>
                 </form>
@@ -153,6 +192,18 @@ const Login = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="mt-5">
+              <p className="text-center text-gray-600 max-w text-sm">
+                Don't have an account yet?{" "}
+                <a
+                  onClick={(e) => navigate("/signup")}
+                  href="#"
+                  className="font-medium text-[#32c896] hover:text-[#5CD3AB] transition-all ease-in-out duration-300"
+                >
+                  Sign up
+                </a>
+              </p>
             </div>
           </div>
         </div>

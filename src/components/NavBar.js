@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState(null);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      setIsSignedIn(true);
+    } else {
+      setIsSignedIn(false);
+    }
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    setIsSignedIn(false);
+    setSelectedLink(null); // Clear selected link on sign out
+  };
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -27,24 +44,46 @@ const Navbar = () => {
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 to="/route-recommendation"
-                className={`${selectedLink === "/route-recommendation"? "text-green-600": "text-gray-900 hover:text-green-600"
-                } px-3 py-2 rounded-md font-medium`}
-                onClick={() => handleLinkClick("/route-recommendation")}>
-                Route Recommendation
-              </Link>
-              <Link to="/car-pooling" className={`${selectedLink === "/car-pooling"? "text-green-600"
+                className={`${
+                  selectedLink === "/route-recommendation"
+                    ? "text-green-600"
                     : "text-gray-900 hover:text-green-600"
                 } px-3 py-2 rounded-md font-medium`}
-                onClick={() => handleLinkClick("/car-pooling")}>
+                onClick={() => handleLinkClick("/route-recommendation")}
+              >
+                Route Recommendation
+              </Link>
+              <Link
+                to="/car-pooling"
+                className={`${
+                  selectedLink === "/car-pooling"
+                    ? "text-green-600"
+                    : "text-gray-900 hover:text-green-600"
+                } px-3 py-2 rounded-md font-medium`}
+                onClick={() => handleLinkClick("/car-pooling")}
+              >
                 Car Pooling
               </Link>
-              <Link to="/leaderboard" className={`${selectedLink === "/leaderboard"? "text-green-600": "text-gray-900 hover:text-green-600"
-                } px-3 py-2 rounded-md font-medium`}onClick={() => handleLinkClick("/leaderboard")}>
+              <Link
+                to="/leaderboard"
+                className={`${
+                  selectedLink === "/leaderboard"
+                    ? "text-green-600"
+                    : "text-gray-900 hover:text-green-600"
+                } px-3 py-2 rounded-md font-medium`}
+                onClick={() => handleLinkClick("/leaderboard")}
+              >
                 Leaderboard
               </Link>
-              <Link to="/redeem" className={`${selectedLink === "/redeem"? "text-green-600": "text-gray-900 hover:text-green-600"
+              <Link
+                to="/redeem"
+                className={`${
+                  selectedLink === "/redeem"
+                    ? "text-green-600"
+                    : "text-gray-900 hover:text-green-600"
                 } px-3 py-2 rounded-md font-medium`}
-                onClick={() => handleLinkClick("/redeem")}>
+                onClick={() => handleLinkClick("/redeem")}
+              >
                 Redeem
               </Link>
               <Link
@@ -58,12 +97,26 @@ const Navbar = () => {
               >
                 Community
               </Link>
-              <Link to="/signup" className={`${selectedLink === "/signup"? "text-green-600"
-                    : "text-gray-900 hover:text-green-600"
-                } px-3 py-2 rounded-md font-medium`}
-                onClick={() => handleLinkClick("/signup")}>
-                Sign Up
-              </Link>
+              {isSignedIn ? (
+                <button
+                  onClick={handleSignOut}
+                  className="text-gray-900 hover:text-green-600 px-3 py-2 rounded-md font-medium"
+                >
+                  Sign Out
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className={`${
+                    selectedLink === "/login"
+                      ? "text-green-600"
+                      : "text-gray-900 hover:text-green-600"
+                  } px-3 py-2 rounded-md font-medium`}
+                  onClick={() => handleLinkClick("/login")}
+                >
+                  Sign In
+                </Link>
+              )}
             </div>
           </div>
           <div className="-mr-2 flex items-center lg:hidden">
@@ -115,21 +168,56 @@ const Navbar = () => {
       {isOpen && (
         <div className="lg:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link to="/route-recommendation" className="text-gray-900 hover:text-green-600 text-base font-medium block" >
+            <Link
+              to="/route-recommendation"
+              className="text-gray-900 hover:text-green-600 text-base font-medium block"
+            >
               Route Recommendation
             </Link>
-            <Link to="/car-pooling" className="text-gray-900 hover:text-green-600 text-base font-medium block" >
+            <Link
+              to="/car-pooling"
+              className="text-gray-900 hover:text-green-600 text-base font-medium block"
+            >
               Car Pooling
             </Link>
-            <Link to="/leaderboard" className="text-gray-900 hover:text-green-600 text-base font-medium block">
+            <Link
+              to="/leaderboard"
+              className="text-gray-900 hover:text-green-600 text-base font-medium block"
+            >
               Leaderboard
             </Link>
-            <Link to="/redeem" className="text-gray-900 hover:text-green-600 text-base font-medium block" >
+            <Link
+              to="/redeem"
+              className="text-gray-900 hover:text-green-600 text-base font-medium block"
+            >
               Redeem
             </Link>
-            <Link to="/community"  className="text-gray-900 hover:text-green-600 text-base font-medium block">
+            <Link
+              to="/community"
+              className="text-gray-900 hover:text-green-600 text-base font-medium block"
+            >
               Community
             </Link>
+            {isSignedIn ? (
+              <button
+                onClick={handleSignOut}
+                className="text-gray-900 hover:text-green-600 rounded-md block text-base font-medium"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className={`${
+                  selectedLink === "/login"
+                    ? "text-green-600"
+                    : "text-gray-900 hover:text-green-600"
+                } rounded-md text-base block font-medium`}
+                onClick={() => handleLinkClick("/login")}
+              >
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       )}
