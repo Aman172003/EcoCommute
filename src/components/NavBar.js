@@ -18,6 +18,8 @@ const Navbar = () => {
   }, []);
 
   const handleSignOut = () => {
+    const name = localStorage.getItem("name");
+    console.log("Signed out:", name);
     localStorage.removeItem("token");
     setIsSignedIn(false);
     setSelectedLink(null); // Clear selected link on sign out
