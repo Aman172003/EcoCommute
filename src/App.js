@@ -26,6 +26,7 @@ function NavigationControl() {
     <React.Fragment>
       {!hideNavbarAndFooter && <Navbar />}
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/route-recommendation" element={<RouteRecommend />} />
         <Route path="/car-pooling" element={<Carpooling />} />
