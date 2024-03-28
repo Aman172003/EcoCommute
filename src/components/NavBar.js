@@ -7,6 +7,8 @@ const Navbar = () => {
   const [selectedLink, setSelectedLink] = useState(null);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
+  const name = localStorage.getItem("name");
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -18,9 +20,9 @@ const Navbar = () => {
   }, []);
 
   const handleSignOut = () => {
-    const name = localStorage.getItem("name");
     console.log("Signed out:", name);
     localStorage.removeItem("token");
+    localStorage.removeItem("name");
     setIsSignedIn(false);
     setSelectedLink(null); // Clear selected link on sign out
   };
