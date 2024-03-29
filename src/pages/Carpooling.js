@@ -88,6 +88,7 @@ const Carpooling = () => {
                         environment and reduce traffic congestion.
                       </p>
                     </div>
+                    <div className="w-full md:hidden border-t border-gray-300 my-4"></div>
                     {/* Right Side */}
                     <div className="w-full md:w-1/2 md:mt-0">
                       <img
