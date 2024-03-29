@@ -61,7 +61,7 @@ const Carpooling = () => {
                       <span className="sr-only">Close modal</span>
                     </button>
                   </div>
-                  <div className="p-4 md:p-5 md:flex md:flex-wrap">
+                  <div className="p-4 md:p-5 md:flex md:flex-wrap md:divide-x-2">
                     {/* Left Side */}
                     <div className="w-full md:w-1/2">
                       <img
@@ -96,17 +96,17 @@ const Carpooling = () => {
                         alt="passenger"
                         className="w-full"
                       />
-                      <p className="text-xl font-semibold leading-relaxed text-gray-500 dark:text-gray-600 mt-4 mb-4">
+                      <p className="text-xl font-semibold leading-relaxed text-gray-500 dark:text-gray-600 mt-4 mb-4 md:ml-2">
                         Are you a Passenger?
                       </p>
                       <button
                         onClick={toggleModal}
-                        className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 md:ml-2"
                         type="button"
                       >
                         Share a ride
                       </button>
-                      <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 mt-4">
+                      <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400 mt-4 md:ml-2">
                         As a passenger on our carpooling platform, you can
                         easily find and book rides with verified drivers
                         going your way. Enjoy a comfortable and affordable
