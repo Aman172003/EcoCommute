@@ -39,7 +39,22 @@ const Community = () => {
         "Support our initiative to promote renewable energy sources for a sustainable future.",
       startDate: "March 15, 2024",
       supporters: 400,
+    }
+  ];
+
+  const comments = [
+    {
+      id: 1,
+      comment: "I absolutely agree! The Clean Beach Campaign is a fantastic initiative. Let's work together to protect our environment and make our beaches cleaner for everyone.",
+      author: "OceanLover456",
+      date: "March 21, 2024"
     },
+    {
+      id: 2,
+      comment: "I absolutely agree! The Clean Beach Campaign is a fantastic initiative. Let's work together to protect our environment and make our beaches cleaner for everyone.",
+      author: "OceanLover456",
+      date: "March 22, 2024"
+    }
   ];
 
   return (
@@ -80,12 +95,13 @@ const Community = () => {
                 <p className="text-gray-600 mb-2">
                   Start Date: {campaign.startDate}
                 </p>
-                <p className="text-gray-600 mb-4">
-                  Supporters: {campaign.supporters}
-                </p>
+                {campaign.supporters && (
+                  <p className="text-gray-600 mb-4">
+                    Supporters: {campaign.supporters}
+                  </p>
+                )}
               </div>
               <div className="text-center">
-                {/* <button className="custom-button px-4 py-2 text-white rounded">Join Campaign</button> */}
                 <button className="px-4 py-2 bg-green-800 text-white rounded-lg hover:bg-green-700 ">
                   Join Campaign
                 </button>
@@ -103,7 +119,6 @@ const Community = () => {
           Got an idea for a campaign? Host it here and engage with the
           community!
         </p>
-        {/* <button className="custom-button px-4 py-2 rounded ">Host a Campaign</button> */}
         <button
           onClick={toggleModal}
           className="px-4 py-2 bg-green-800 text-white rounded-lg hover:bg-green-700"
@@ -118,15 +133,24 @@ const Community = () => {
         <h3 className="text-2xl text-custom-green font-semibold mb-3">
           Comments
         </h3>
+        
         <textarea
           className="w-full p-2 border border-gray-300 rounded-sm mb-2"
           rows="3"
           placeholder="Write your comment here..."
         ></textarea>
-        {/* <button className="custom-button px-4 py-2 text-white rounded bg-custom-green hover:bg-custom-green-dark inline-block">Comment</button> */}
-        <button className="px-4 py-2 bg-green-800 text-white rounded-lg hover:bg-green-700">
+        <button className="px-4 py-2 bg-green-800 text-white rounded-lg hover:bg-green-700 mb-4">
           Comment
         </button>
+        {comments.map((comment) => (
+          <div key={comment.id} className="rounded p-4 mb-4 shadow-lg bg-gray-100 rounded">
+            <p className="text-gray-800">{comment.comment}</p>
+            <div className="flex justify-between items-center mt-2">
+              <span className="text-gray-600 text-sm">Posted by: {comment.author}</span>
+              <span className="text-gray-600 text-sm">{comment.date}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
