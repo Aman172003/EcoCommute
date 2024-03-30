@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Modal from "../components/Modal";
 import CampaignContext from "../context/CampaignContext";
+import EditModal from "./EditModal";
 
 const Community = () => {
   const context = useContext(CampaignContext);
@@ -10,8 +11,9 @@ const Community = () => {
     addSupporter,
     setCampaigns,
     deleteCampaign,
-    editCampaign,
   } = context;
+
+  const [currentCampaign, setCurrentCampaign] = useState(null); // State to store the current campaign being edited
 
   const handleJoinCampaign = async (id) => {
     if (!localStorage.getItem("token")) {
@@ -45,9 +47,14 @@ const Community = () => {
   }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const editToggleModal = () => {
+    setIsEditModalOpen(!isEditModalOpen);
   };
 
   const handleHostCampaign = () => {
@@ -69,6 +76,11 @@ const Community = () => {
     } else {
       toggleModal();
     }
+  };
+
+  const handleEditCampaign = (campaign) => {
+    setCurrentCampaign(campaign);
+    editToggleModal();
   };
 
   function formatDate(dateString) {
@@ -138,19 +150,46 @@ const Community = () => {
                   </p>
                 </div>
 
-                <div className="text-center">
-                  <button
-                    onClick={() => handleJoinCampaign(campaign._id)}
-                    className={`px-4 py-2 rounded-lg ${
-                      campaign.supporters.includes(localStorage.getItem("id"))
-                        ? "bg-yellow-600 hover:bg-yellow-500 text-white"
-                        : "bg-green-800 text-white hover:bg-green-700"
-                    }`}
-                  >
-                    {campaign.supporters.includes(localStorage.getItem("id"))
-                      ? "Disjoin Campaign"
-                      : "Join Campaign"}
-                  </button>
+                <div className="flex justify-between items-center">
+                  <div>
+                    {/* Icon for editing */}
+                    {localStorage.getItem("id") === campaign.user && (
+                      <button onClick={() => handleEditCampaign(campaign)}>
+                        <i className="fas fa-edit text-green-800 hover:text-green-700"></i>
+                      </button>
+                    )}
+
+                    <EditModal
+                      isEditModalOpen={isEditModalOpen}
+                      editToggleModal={editToggleModal}
+                      currentCampaign={currentCampaign}
+                    />
+                  </div>
+                  {/* join button */}
+                  <div className="text-center">
+                    <button
+                      onClick={() => handleJoinCampaign(campaign._id)}
+                      className={`px-4 py-2 rounded-lg ${
+                        campaign.supporters.includes(localStorage.getItem("id"))
+                          ? "bg-yellow-600 hover:bg-yellow-500 text-white"
+                          : "bg-green-800 text-white hover:bg-green-700"
+                      }`}
+                    >
+                      {campaign.supporters.includes(localStorage.getItem("id"))
+                        ? "Disjoin Campaign"
+                        : "Join Campaign"}
+                    </button>
+                  </div>
+
+                  {/* Delete icons */}
+                  <div>
+                    {/* Icon for deleting */}
+                    {localStorage.getItem("id") === campaign.user && (
+                      <button onClick={() => deleteCampaign(campaign._id)}>
+                        <i className="fas fa-trash text-green-800 hover:text-green-700"></i>
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

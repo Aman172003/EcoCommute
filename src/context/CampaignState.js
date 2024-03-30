@@ -45,7 +45,6 @@ const CampaignState = (props) => {
       },
     });
     const json = await response.json();
-    console.log(json);
 
     const newCampaign = campaigns.filter((campaign) => {
       return campaign._id !== id;
@@ -65,7 +64,6 @@ const CampaignState = (props) => {
       body: JSON.stringify({ title, date, address, description }),
     });
     const json = await response.json();
-    console.log(json);
 
     let newCampaigns = JSON.parse(JSON.stringify(campaigns));
     // LOGIC TO EDIT IN CLIENT

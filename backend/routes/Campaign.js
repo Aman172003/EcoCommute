@@ -61,7 +61,7 @@ router.put("/updatecampaign/:id", fetchuser, async (req, res) => {
       newCampaign.title = title;
     }
     if (description) {
-      newNote.description = description;
+      newCampaign.description = description;
     }
     if (date) {
       newCampaign.date = date;

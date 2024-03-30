@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import CampaignContext from "../context/CampaignContext";
 
-const Modal = ({ isModalOpen, toggleModal }) => {
+const EditModal = ({ isEditModalOpen, editToggleModal, currentCampaign }) => {
   const refClose = useRef(null);
   const context = useContext(CampaignContext);
-  const { addCampaign } = context;
+  const { editCampaign } = context;
 
-  const [campaign, setCampaign] = useState({
+  const [editedCampaign, setEditedCampaign] = useState({
+    _id: "",
     title: "",
     date: "",
     address: "",
@@ -15,42 +16,49 @@ const Modal = ({ isModalOpen, toggleModal }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    refClose.current.click();
-    addCampaign(
-      campaign.title,
-      campaign.date,
-      campaign.address,
-      campaign.description
+    editCampaign(
+      editedCampaign._id,
+      editedCampaign.title,
+      editedCampaign.date,
+      editedCampaign.address,
+      editedCampaign.description
     );
-    setCampaign({
-      title: "",
-      date: "",
-      address: "",
-      description: "",
-    });
+    refClose.current.click();
   };
 
   useEffect(() => {
-    if (isModalOpen) {
+    if (isEditModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [isModalOpen]);
+    if (currentCampaign) {
+      const formattedDate = new Date(currentCampaign.date)
+        .toISOString()
+        .split("T")[0];
+      setEditedCampaign({
+        _id: currentCampaign._id,
+        title: currentCampaign.title,
+        date: formattedDate,
+        address: currentCampaign.address,
+        description: currentCampaign.description,
+      });
+    }
+  }, [isEditModalOpen, currentCampaign]);
 
   const onChange = (e) => {
-    setCampaign({ ...campaign, [e.target.name]: e.target.value });
+    setEditedCampaign({ ...editedCampaign, [e.target.name]: e.target.value });
   };
   return (
     <div
       id="crud-modal"
       tabIndex="-1"
-      aria-hidden={!isModalOpen}
+      aria-hidden={!isEditModalOpen}
       className={`${
-        isModalOpen ? "" : "hidden"
+        isEditModalOpen ? "" : "hidden"
       } fixed inset-0 flex items-center justify-center overflow-y-auto overflow-x-hidden z-50`}
       style={{
-        backdropFilter: isModalOpen ? "blur(4px)" : "none",
+        backdropFilter: isEditModalOpen ? "blur(4px)" : "none",
         transition: "backdrop-filter 0.3s ease",
       }}
     >
@@ -58,10 +66,10 @@ const Modal = ({ isModalOpen, toggleModal }) => {
         <div className="relative bg-white rounded-lg shadow">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t bg-green-100">
             <h3 className="text-xl font-semibold text-gray-900">
-              Host a campaign
+              Update campaign details
             </h3>
             <button
-              onClick={toggleModal}
+              onClick={editToggleModal}
               ref={refClose}
               type="button"
               className="text-gray-400 bg-transparent hover:bg-green-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
@@ -96,7 +104,7 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                   Title
                 </label>
                 <input
-                  value={campaign.title}
+                  value={editedCampaign.title}
                   type="text"
                   name="title"
                   id="title"
@@ -115,7 +123,7 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                 </label>
                 <input
                   type="date"
-                  value={campaign.date}
+                  value={editedCampaign.date}
                   name="date"
                   onChange={onChange}
                   id="date"
@@ -133,7 +141,7 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                 <input
                   type="text"
                   name="address"
-                  value={campaign.address}
+                  value={editedCampaign.address}
                   onChange={onChange}
                   id="address"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-gray-900 focus:border-gray-900 block w-full p-2.5"
@@ -150,7 +158,7 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                 </label>
                 <textarea
                   name="description"
-                  value={campaign.description}
+                  value={editedCampaign.description}
                   id="description"
                   onChange={onChange}
                   rows="4"
@@ -166,19 +174,7 @@ const Modal = ({ isModalOpen, toggleModal }) => {
               type="submit"
               className="text-white inline-flex items-center bg-green-800 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
-              <svg
-                className="me-1 -ms-1 w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-              Host
+              Update
             </button>
           </form>
         </div>
@@ -187,4 +183,4 @@ const Modal = ({ isModalOpen, toggleModal }) => {
   );
 };
 
-export default Modal;
+export default EditModal;
