@@ -13,6 +13,7 @@ connectToDB();
 
 app.use("", require("./routes/auth"));
 app.use("/community", require("./routes/Campaign"));
+app.use("/community", require("./routes/Comments"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

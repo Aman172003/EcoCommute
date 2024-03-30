@@ -95,19 +95,6 @@ const CampaignState = (props) => {
     }
     return await response.json();
   };
-
-  // get the current user
-  // const currentUser = async () => {
-  //   const response = await fetch(`${host}/getUser`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "auth-token": localStorage.getItem("token"),
-  //     },
-  //     body: JSON.stringify({}),
-  //   });
-  //   return await response.json();
-  // };
   return (
     <CampaignContext.Provider
       value={{

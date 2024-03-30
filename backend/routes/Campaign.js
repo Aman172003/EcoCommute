@@ -55,7 +55,6 @@ router.post(
 router.put("/updatecampaign/:id", fetchuser, async (req, res) => {
   const { title, description, date, address } = req.body;
   try {
-    // create a new note object
     const newCampaign = {};
     if (title) {
       newCampaign.title = title;
@@ -69,12 +68,10 @@ router.put("/updatecampaign/:id", fetchuser, async (req, res) => {
     if (address) {
       newCampaign.address = address;
     }
-    // find the note to be updated and update it
     let campaign = await Campaign.findById(req.params.id);
     if (!campaign) {
       return res.status(404).send("NOT FOUND");
     }
-    // agar jo banda logged in hai wo note ka user na ho to
     if (campaign.user.toString() !== req.user.id) {
       return res.status(401).send("Not Allowed");
     }
@@ -93,12 +90,10 @@ router.put("/updatecampaign/:id", fetchuser, async (req, res) => {
 // ROUTE 4: Delete an existing Campaign
 router.delete("/deletecampaign/:id", fetchuser, async (req, res) => {
   try {
-    // find the note to be deleted and delete it
     let campaign = await Campaign.findById(req.params.id);
     if (!campaign) {
       return res.status(404).send("NOT FOUND");
     }
-    // agar jo banda logged in hai wo note ka user na ho to hi delete kar skta hai
     if (campaign.user.toString() !== req.user.id) {
       return res.status(401).send("Not Allowed");
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Modal from "../components/Modal";
 import CampaignContext from "../context/CampaignContext";
 import EditModal from "./EditModal";
+import Comments from "./Comments";
 
 const Community = () => {
   const context = useContext(CampaignContext);
@@ -88,23 +89,6 @@ const Community = () => {
     const options = { month: "long", day: "2-digit", year: "numeric" };
     return date.toLocaleDateString("en-US", options);
   }
-
-  const comments = [
-    {
-      id: 1,
-      comment:
-        "I absolutely agree! The Clean Beach Campaign is a fantastic initiative. Let's work together to protect our environment and make our beaches cleaner for everyone.",
-      author: "OceanLover456",
-      date: "March 21, 2024",
-    },
-    {
-      id: 2,
-      comment:
-        "I absolutely agree! The Clean Beach Campaign is a fantastic initiative. Let's work together to protect our environment and make our beaches cleaner for everyone.",
-      author: "OceanLover456",
-      date: "March 22, 2024",
-    },
-  ];
 
   return (
     <div className="container mx-auto mt-8 px-4">
@@ -215,34 +199,7 @@ const Community = () => {
       </div>
       <hr className="my-8 border-t-2 border-gray-200" />
 
-      <div className="mb-8">
-        <h3 className="text-2xl text-custom-green font-semibold mb-3">
-          Comments
-        </h3>
-
-        <textarea
-          className="w-full p-2 border border-gray-300 rounded-sm mb-2"
-          rows="3"
-          placeholder="Write your comment here..."
-        ></textarea>
-        <button className="px-4 py-2 bg-green-800 text-white rounded-lg hover:bg-green-700 mb-4">
-          Comment
-        </button>
-        {comments.map((comment) => (
-          <div
-            key={comment.id}
-            className="rounded p-4 mb-4 shadow-lg bg-gray-100"
-          >
-            <p className="text-gray-800">{comment.comment}</p>
-            <div className="flex justify-between items-center mt-2">
-              <span className="text-gray-600 text-sm">
-                Posted by: {comment.author}
-              </span>
-              <span className="text-gray-600 text-sm">{comment.date}</span>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Comments />
     </div>
   );
 };
