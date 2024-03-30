@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Leaderboard from "./pages/Leaderboard";
+import CampaignState from "./context/CampaignState";
 
 // Custom component to control the visibility of Navbar and Footer
 function NavigationControl() {
@@ -26,7 +27,6 @@ function NavigationControl() {
     <React.Fragment>
       {!hideNavbarAndFooter && <Navbar />}
       <Routes>
-        
         <Route path="/" element={<Home />} />
         <Route path="/route-recommendation" element={<RouteRecommend />} />
         <Route path="/car-pooling" element={<Carpooling />} />
@@ -43,9 +43,11 @@ function NavigationControl() {
 
 function App() {
   return (
-    <Router>
-      <NavigationControl />
-    </Router>
+    <CampaignState>
+      <Router>
+        <NavigationControl />
+      </Router>
+    </CampaignState>
   );
 }
 

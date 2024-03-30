@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState(null);
   const [isSignedIn, setIsSignedIn] = useState(false);
 
-  const name = localStorage.getItem("name");
-
+  var name = "";
   useEffect(() => {
+    name = localStorage.getItem("name");
     const token = localStorage.getItem("token");
-
     if (token) {
       setIsSignedIn(true);
     } else {
@@ -23,8 +23,13 @@ const Navbar = () => {
     console.log("Signed out:", name);
     localStorage.removeItem("token");
     localStorage.removeItem("name");
+    localStorage.removeItem("id");
     setIsSignedIn(false);
-    setSelectedLink(null); // Clear selected link on sign out
+    setSelectedLink(null);
+    navigate("/");
+    if (isOpen) {
+      setIsOpen(false);
+    }
   };
 
   const toggleNavbar = () => {

@@ -29,9 +29,9 @@ const Login = () => {
     const json = await response.json();
     console.log(json);
     if (json.success) {
-      //save the auth token and redirect
       localStorage.setItem("token", json.authToken);
       localStorage.setItem("name", json.name);
+      localStorage.setItem("id", json.id);
       console.log("Successfully logged In:", json.name);
       navigate("/");
     } else {

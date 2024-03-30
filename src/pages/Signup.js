@@ -44,6 +44,7 @@ const Signup = () => {
         //save the auth token and redirect
         localStorage.setItem("token", json.authtoken);
         localStorage.setItem("name", json.name);
+        localStorage.setItem("id", json.id);
         //   this will navigate to "/"
         navigate("/");
         console.log("Successfully Signed In:", json.name);
@@ -83,13 +84,13 @@ const Signup = () => {
         </div>
       </nav>
 
-      <div className="flex flex-col justify-center items-center py-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col justify-center items-center py-2 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-900">
             Create your account
           </h2>
         </div>
-        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form
               className="space-y-6"

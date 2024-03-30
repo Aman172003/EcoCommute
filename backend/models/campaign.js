@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const CampaignSchema = new Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
   title: {
     type: String,
     required: true,
@@ -10,20 +14,19 @@ const CampaignSchema = new Schema({
     type: String,
     required: true,
   },
-  startDate: {
+  date: {
     type: Date,
     required: true,
   },
-  host: {
-    type: mongoose.Schema.Types.ObjectId,
+  address: {
+    type: String,
+    required: true,
+  },
+  supporters: {
+    type: [mongoose.Schema.Types.ObjectId],
+    default: [],
     ref: "user",
   },
-  supporters: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
-    },
-  ],
 });
 
 const Campaign = mongoose.model("campaign", CampaignSchema);

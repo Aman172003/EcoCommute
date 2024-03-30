@@ -1,6 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
+import CampaignContext from "../context/CampaignContext";
 
 const Modal = ({ isModalOpen, toggleModal }) => {
+  const refClose = useRef(null);
+  const context = useContext(CampaignContext);
+  const { addCampaign } = context;
+
+  const [campaign, setCampaign] = useState({
+    title: "",
+    date: "",
+    address: "",
+    description: "",
+  });
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    refClose.current.click();
+    addCampaign(
+      campaign.title,
+      campaign.date,
+      campaign.address,
+      campaign.description
+    );
+    setCampaign({
+      title: "",
+      date: "",
+      address: "",
+      description: "",
+    });
+    console.log("Campaign Added Successfully");
+    console.log(campaign);
+  };
+
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
@@ -8,6 +39,10 @@ const Modal = ({ isModalOpen, toggleModal }) => {
       document.body.style.overflow = "auto";
     }
   }, [isModalOpen]);
+
+  const onChange = (e) => {
+    setCampaign({ ...campaign, [e.target.name]: e.target.value });
+  };
   return (
     <div
       id="crud-modal"
@@ -29,6 +64,7 @@ const Modal = ({ isModalOpen, toggleModal }) => {
             </h3>
             <button
               onClick={toggleModal}
+              ref={refClose}
               type="button"
               className="text-gray-400 bg-transparent hover:bg-green-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
               data-modal-toggle="crud-modal"
@@ -52,7 +88,7 @@ const Modal = ({ isModalOpen, toggleModal }) => {
             </button>
           </div>
 
-          <form className="p-4 md:p-5">
+          <form onSubmit={handleClick} className="p-4 md:p-5">
             <div className="grid gap-4 mb-4 grid-cols-2">
               <div className="col-span-2">
                 <label
@@ -62,9 +98,11 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                   Title
                 </label>
                 <input
+                  value={campaign.title}
                   type="text"
                   name="title"
                   id="title"
+                  onChange={onChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-gray-900 focus:border-gray-900 block w-full p-2.5"
                   placeholder="Enter the title"
                   required
@@ -79,7 +117,9 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                 </label>
                 <input
                   type="date"
+                  value={campaign.date}
                   name="date"
+                  onChange={onChange}
                   id="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-gray-900 focus:border-gray-900 block w-full p-2.5"
                   required
@@ -95,6 +135,8 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                 <input
                   type="text"
                   name="address"
+                  value={campaign.address}
+                  onChange={onChange}
                   id="address"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-gray-900 focus:border-gray-900 block w-full p-2.5"
                   placeholder="Enter the address"
@@ -109,7 +151,10 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                   Description
                 </label>
                 <textarea
+                  name="description"
+                  value={campaign.description}
                   id="description"
+                  onChange={onChange}
                   rows="4"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 outline-none focus:ring-gray-900 focus:border-gray-900"
                   placeholder="Write campaign description here"
