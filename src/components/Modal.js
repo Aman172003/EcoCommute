@@ -15,19 +15,23 @@ const Modal = ({ isModalOpen, toggleModal }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    refClose.current.click();
-    addCampaign(
-      campaign.title,
-      campaign.date,
-      campaign.address,
-      campaign.description
-    );
-    setCampaign({
-      title: "",
-      date: "",
-      address: "",
-      description: "",
-    });
+    if (campaign.address.length >= 10 && campaign.description.length >= 10) {
+      refClose.current.click();
+      addCampaign(
+        campaign.title,
+        campaign.date,
+        campaign.address,
+        campaign.description
+      );
+      setCampaign({
+        title: "",
+        date: "",
+        address: "",
+        description: "",
+      });
+    } else {
+      console.log("description and adress length must be greater than 10");
+    }
   };
 
   useEffect(() => {
@@ -156,7 +160,7 @@ const Modal = ({ isModalOpen, toggleModal }) => {
                   rows="4"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 outline-none focus:ring-gray-900 focus:border-gray-900"
                   placeholder="Write campaign description here"
-                  minLength={25}
+                  minLength={10}
                   style={{ height: "163px" }}
                   required
                 ></textarea>

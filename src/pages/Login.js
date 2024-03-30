@@ -32,7 +32,7 @@ const Login = () => {
       localStorage.setItem("token", json.authToken);
       localStorage.setItem("name", json.name);
       localStorage.setItem("id", json.id);
-      console.log("Successfully logged In:", json.name);
+      console.log("Successfully logged In:");
       navigate("/");
     } else {
       console.log("Invalid credentials");

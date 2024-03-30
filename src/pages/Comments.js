@@ -68,6 +68,7 @@ const Comments = () => {
       const formattedDate = `${year}-${month}-${day}`;
       newComment.date = formattedDate;
       newComment.author = localStorage.getItem("name");
+      console.log(newComment);
       if (newComment.content.trim().length > 0) {
         addComment(newComment.content, newComment.date, newComment.author);
         setNewComment({
