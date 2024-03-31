@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import CampaignContext from "../context/CampaignContext";
 
-const Modal = ({ isModalOpen, toggleModal }) => {
+const HostModal = ({ isModalOpen, toggleModal }) => {
   const refClose = useRef(null);
   const context = useContext(CampaignContext);
   const { addCampaign } = context;
@@ -191,4 +191,4 @@ const Modal = ({ isModalOpen, toggleModal }) => {
   );
 };
 
-export default Modal;
+export default HostModal;

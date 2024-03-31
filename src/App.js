@@ -12,8 +12,8 @@ import Carpooling from "./pages/Carpooling";
 import Redeem from "./pages/Redeem";
 import Community from "./pages/Community";
 import Footer from "./components/Footer";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
 import Leaderboard from "./pages/Leaderboard";
 import CampaignState from "./context/CampaignState";
 

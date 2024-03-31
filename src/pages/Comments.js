@@ -95,7 +95,7 @@ const Comments = () => {
       overlay.style.justifyContent = "center";
       overlay.style.alignItems = "center";
       overlay.style.zIndex = "9999";
-      overlay.innerHTML = `<p style='color: white; font-size: 24px;'>You are not signed in. Please <a href="/login" style='color: green; cursor: pointer;'>Sign in</a> to join a campaign.</p>`;
+      overlay.innerHTML = `<p style='color: white; font-size: 24px;'>You are not signed in. Please <a href="/login" style='color: green; cursor: pointer;'>Sign in</a> to Comment.</p>`;
       document.body.appendChild(overlay);
     }
   };

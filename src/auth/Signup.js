@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
+// import { auth, provider } from "./config";
+// import { signInWithPopup } from "firebase/auth";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -55,6 +57,18 @@ const Signup = () => {
       setWarning(true);
     }
   };
+
+  // const [value, setValue] = useState("");
+  // const handleGoogleClick = () => {
+  //   signInWithPopup(auth, provider).then((data) => {
+  //     setValue(data.user.email);
+  //     localStorage.setItem("email", data.user.email);
+  //   });
+  // };
+  // useEffect(() => {
+  //   setValue(localStorage.getItem("email"));
+  // });
+
   const handleCitySelect = (city) => {
     setSelected(city);
     setOpen(false);
@@ -295,6 +309,7 @@ const Signup = () => {
                 </div>
                 <div>
                   <a
+                    // onClick={handleGoogleClick}
                     href="#"
                     className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                   >
