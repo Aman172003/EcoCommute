@@ -40,12 +40,19 @@ router.post(
         const data = {
           user: {
             id: user.id,
-            name: user.name,
+            // name: user.name,
+            // city: user.city
           },
         };
         success = true;
         const authToken = jwt.sign(data, JWT_SECRET);
-        res.json({ authToken, success, name: user.name, id: user.id });
+        res.json({
+          authToken,
+          success,
+          name: user.name,
+          id: user.id,
+          city: user.city,
+        });
       }
     } catch (error) {
       console.error(error.message);
@@ -86,12 +93,18 @@ router.post(
         const data = {
           user: {
             id: user.id,
-            name: user.name,
+            // name: user.name,
           },
         };
         const authToken = jwt.sign(data, JWT_SECRET);
         success = true;
-        res.json({ authToken, success, name: user.name, id: user.id });
+        res.json({
+          authToken,
+          success,
+          name: user.name,
+          id: user.id,
+          city: user.city,
+        });
       }
     } catch (error) {
       console.error(error.message);
