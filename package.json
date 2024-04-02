@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-google-maps/api": "^2.19.3",
     "concurrently": "^8.2.2",
     "firebase": "^10.10.0",
     "framer-motion": "^11.0.20",
