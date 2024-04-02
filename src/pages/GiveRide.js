@@ -36,7 +36,7 @@ function App() {
       return;
     }
   
-    const directionsService = new window.google.maps.DirectionsService(); // Create a new DirectionsService instance
+    const directionsService = new window.google.maps.DirectionsService(); 
     directionsService.route(
       {
         origin: originRef.current.value,
@@ -45,11 +45,11 @@ function App() {
       },
       (result, status) => {
         if (status === 'OK') {
-          setDirectionsResponse(result); // Set the directions response
-          setDistance(result.routes[0].legs[0].distance.text); // Set distance
-          setDuration(result.routes[0].legs[0].duration.text); // Set duration
+          setDirectionsResponse(result);
+          setDistance(result.routes[0].legs[0].distance.text); 
+          setDuration(result.routes[0].legs[0].duration.text);
         } else {
-          console.error('Directions request failed due to ' + status); // Log an error if the request fails
+          console.error('Directions request failed due to ' + status); 
         }
       }
     );
