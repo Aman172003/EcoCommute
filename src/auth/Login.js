@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import GeneralContext from "../context/GeneralContext";
 
 const colors = {
   primary: "#9BCF53",
@@ -9,6 +10,8 @@ const colors = {
 };
 
 const Login = () => {
+  const context = useContext(GeneralContext);
+  const { getLeaderboardData } = context;
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
@@ -32,6 +35,13 @@ const Login = () => {
       localStorage.setItem("token", json.authToken);
       localStorage.setItem("name", json.name);
       localStorage.setItem("id", json.id);
+      const temp = await getLeaderboardData();
+      const userEntry = await temp.find(
+        (entry) => entry.user === localStorage.getItem("id")
+      );
+      const userCoins = userEntry.coins;
+      localStorage.setItem("coins", userCoins);
+      console.log(localStorage.getItem("coins"));
       console.log("Successfully logged In:");
       navigate("/");
     } else {

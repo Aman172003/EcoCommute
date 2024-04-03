@@ -16,6 +16,7 @@ app.use("/community", require("./routes/Campaign"));
 app.use("/community", require("./routes/Comments"));
 app.use("/driver", require("./routes/giveRide"));
 app.use("/passenger", require("./routes/askRide"));
+app.use("/leaderboard", require("./routes/Leaderboard"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

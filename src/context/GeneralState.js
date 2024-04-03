@@ -1,10 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import CampaignContext from "./CampaignContext";
+import GeneralContext from "./GeneralContext";
 
-const CampaignState = (props) => {
+const GeneralState = (props) => {
   const host = "http://localhost:5000";
+
+  // these are the api calls for campaigns
   const [campaigns, setCampaigns] = useState([]);
+  const [Data, setData] = useState([]);
 
   // get all campaigns
   const getCampaigns = async () => {
@@ -95,8 +98,46 @@ const CampaignState = (props) => {
     }
     return await response.json();
   };
+
+  // api call to get leaderboard
+  const getLeaderboardData = async () => {
+    try {
+      const response = await fetch(`${host}/leaderboard`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
+      const json = await response.json();
+      setData(json);
+      return json;
+    } catch (error) {
+      console.error("Error fetching leaderboard:", error);
+    }
+  };
+
+  // api calls for updating leaderboard
+  const setLeaderboardData = async (Sname, coins) => {
+    try {
+      const response = await fetch(`${host}/leaderboard/update-leaderboard`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({ Sname, coins }),
+      });
+      const json = await response.json();
+      setData(json);
+      return json;
+    } catch (error) {
+      console.error("Error Updating leaderboard:", error);
+    }
+  };
+
   return (
-    <CampaignContext.Provider
+    <GeneralContext.Provider
       value={{
         campaigns,
         setCampaigns,
@@ -105,11 +146,14 @@ const CampaignState = (props) => {
         addSupporter,
         editCampaign,
         deleteCampaign,
+        Data,
+        getLeaderboardData,
+        setLeaderboardData,
       }}
     >
       {props.children}
-    </CampaignContext.Provider>
+    </GeneralContext.Provider>
   );
 };
 
-export default CampaignState;
+export default GeneralState;

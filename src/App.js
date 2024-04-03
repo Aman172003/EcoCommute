@@ -15,7 +15,7 @@ import Footer from "./components/Footer";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import Leaderboard from "./pages/Leaderboard";
-import CampaignState from "./context/CampaignState";
+import GeneralState from "./context/GeneralState";
 import GiveRide from "./pages/GiveRide";
 import AskForRide from "./pages/AskForRide";
 
@@ -47,11 +47,11 @@ function NavigationControl() {
 
 function App() {
   return (
-    <CampaignState>
+    <GeneralState>
       <Router>
         <NavigationControl />
       </Router>
-    </CampaignState>
+    </GeneralState>
   );
 }
 

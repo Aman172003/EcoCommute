@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import HostModal from "../components/HostModal";
-import CampaignContext from "../context/CampaignContext";
+import GeneralContext from "../context/GeneralContext";
 import EditModal from "../components/EditModal";
 import Comments from "./Comments";
 
 const Community = () => {
-  const context = useContext(CampaignContext);
+  const context = useContext(GeneralContext);
   const {
     getCampaigns,
     campaigns,

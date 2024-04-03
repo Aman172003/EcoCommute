@@ -24,6 +24,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("id");
+    localStorage.removeItem("coins");
     setIsSignedIn(false);
     setSelectedLink(null);
     navigate("/");

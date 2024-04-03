@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { BiChevronDown } from "react-icons/bi";
-import { AiOutlineSearch } from "react-icons/ai";
+import GeneralContext from "../context/GeneralContext";
+// import { BiChevronDown } from "react-icons/bi";
+// import { AiOutlineSearch } from "react-icons/ai";
 // import { auth, provider } from "./config";
 // import { signInWithPopup } from "firebase/auth";
 
 const Signup = () => {
+  const context = useContext(GeneralContext);
+  const { setLeaderboardData } = context;
   const navigate = useNavigate();
 
-  const cities = ["Bengaluru", "Delhi", "Mumbai", "Chennai", "Hydrabad"];
-  const [input, setInput] = useState("");
-  const [selected, setSelected] = useState("");
-  const [open, setOpen] = useState(false);
-  const [warning, setWarning] = useState(false);
+  // const cities = ["Bengaluru", "Delhi", "Mumbai", "Chennai", "Hydrabad"];
+  // const [input, setInput] = useState("");
+  // const [selected, setSelected] = useState("");
+  // const [open, setOpen] = useState(false);
+  // const [warning, setWarning] = useState(false);
 
   const [credentials, setCredentials] = useState({
     name: "",
@@ -25,36 +28,46 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("clicked");
-    if (selected) {
-      const { name, email, password } = credentials;
-      const payload = {
-        name,
-        city: selected,
-        email,
-        password,
-      };
-      const response = await fetch("http://localhost:5000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      const json = await response.json();
-      console.log(json);
-      if (json.success) {
-        //save the auth token and redirect
-        localStorage.setItem("token", json.authToken);
-        localStorage.setItem("name", json.name);
-        localStorage.setItem("id", json.id);
-        //   this will navigate to "/"
-        navigate("/");
-        console.log("Successfully Signed In:");
-      } else {
-        console.log("Invalid Credentials");
-      }
+
+    const { name, email, password } = credentials;
+    const payload = {
+      name,
+      // city: selected,
+      email,
+      password,
+    };
+    const response = await fetch("http://localhost:5000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    const json = await response.json();
+    console.log(json);
+    if (json.success) {
+      //save the auth token and redirect
+      localStorage.setItem("token", json.authToken);
+      localStorage.setItem("name", json.name);
+      localStorage.setItem("id", json.id);
+      const temp = await setLeaderboardData(localStorage.getItem("name"), 15);
+      console.log(temp);
+      // Wait for the user data to be updated
+      const updatedData = await temp.find(
+        (entry) => entry.user === localStorage.getItem("id")
+      );
+
+      console.log("Updated Data:", updatedData);
+
+      // Set localStorage coins after the data is updated
+      const userCoins = updatedData.coins;
+      localStorage.setItem("coins", userCoins);
+
+      console.log(localStorage.getItem("coins"));
+      console.log("Successfully Signed In:");
+      navigate("/");
     } else {
-      setWarning(true);
+      console.log("Invalid Credentials");
     }
   };
 
@@ -69,12 +82,12 @@ const Signup = () => {
   //   setValue(localStorage.getItem("email"));
   // });
 
-  const handleCitySelect = (city) => {
-    setSelected(city);
-    setOpen(false);
-    setInput("");
-    setWarning(false);
-  };
+  // const handleCitySelect = (city) => {
+  //   setSelected(city);
+  //   setOpen(false);
+  //   setInput("");
+  //   setWarning(false);
+  // };
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -135,7 +148,7 @@ const Signup = () => {
 
               {/* dropdown to select the city */}
 
-              <div className="relative cursor-pointer">
+              {/* <div className="relative cursor-pointer">
                 <label
                   htmlFor="cityDropdown"
                   className="block text-sm font-medium text-gray-700"
@@ -194,7 +207,7 @@ const Signup = () => {
                     Please select city
                   </p>
                 )}
-              </div>
+              </div> */}
 
               {/* end of dropdown */}
 

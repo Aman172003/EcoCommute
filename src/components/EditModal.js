@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import CampaignContext from "../context/CampaignContext";
+import GeneralContext from "../context/GeneralContext";
 
 const EditModal = ({ isEditModalOpen, editToggleModal, currentCampaign }) => {
   const refClose = useRef(null);
-  const context = useContext(CampaignContext);
+  const context = useContext(GeneralContext);
   const { editCampaign } = context;
 
   const [editedCampaign, setEditedCampaign] = useState({

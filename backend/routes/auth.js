@@ -12,7 +12,7 @@ router.post(
   "/signup",
   [
     body("email", "Enter a valid Email").isEmail(),
-    body("city", "Select a city").exists(),
+    // body("city", "Select a city").exists(),
     body("name", "Enter a valid name").isLength({ min: 3 }),
     body("password", "Enter a valid password").isLength({ min: 8 }),
   ],
@@ -33,7 +33,7 @@ router.post(
         const secPass = await bcrypt.hash(req.body.password, salt);
         user = await User.create({
           name: req.body.name,
-          city: req.body.city,
+          // city: req.body.city,
           password: secPass,
           email: req.body.email,
         });
@@ -51,7 +51,7 @@ router.post(
           success,
           name: user.name,
           id: user.id,
-          city: user.city,
+          // city: user.city,
         });
       }
     } catch (error) {
@@ -103,7 +103,7 @@ router.post(
           success,
           name: user.name,
           id: user.id,
-          city: user.city,
+          // city: user.city,
         });
       }
     } catch (error) {
