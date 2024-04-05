@@ -10,10 +10,10 @@ const DriverSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "passenger",
   },
-  Dname: {
-    type: String,
-    required: true,
-  },
+  // Dname: {
+  //   type: String,
+  //   required: true,
+  // },
   vehicle: {
     type: String,
     required: true,
