@@ -91,7 +91,7 @@ const GiveRide = () => {
         e.preventDefault();
         console.log("Submitting ride offer...");
         try {
-            const response = await fetch(`${host}/api/giveride`, {
+            const response = await fetch(`${host}/driver/giveride`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
