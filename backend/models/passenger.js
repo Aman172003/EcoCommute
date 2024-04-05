@@ -36,17 +36,17 @@ const PassengerSchema = new Schema({
     //   required: true,
     // },
   },
-  location: {
-    // type: {
-    type: String,
-    // enum: ["Point"],
-    required: true,
-    // },
-    // coordinates: {
-    //   type: [Number],
-    //   required: true,
-    // },
-  },
+  // location: {
+  // type: {
+  // type: String,
+  // enum: ["Point"],
+  // required: true,
+  // },
+  // coordinates: {
+  //   type: [Number],
+  //   required: true,
+  // },
+  // },
 });
 
 const Passenger = mongoose.model("passenger", PassengerSchema);

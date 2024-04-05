@@ -1,14 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const Driver = require("../models/driver");
+const RideRequest = require("../models//request");
+const fetchUser = require("../middleware/fetchUser");
+const Passenger = require("../models/passenger");
 
 // Fetch available drivers based on source and destination
 router.get("/availabledrivers", async (req, res) => {
   const { source, destination } = req.body;
   try {
+    // Create a new passenger instance
+    const newPassenger = new Passenger({ source, destination });
+    // Save the new passenger instance to the database
+    await newPassenger.save();
+
     // Find drivers with matching source and destination
     const availableDrivers = await Driver.find({ source, destination });
-    res.json(availableDrivers);
+
+    // Send response including both available drivers and the new passenger
+    res.json({ availableDrivers, newPassenger });
   } catch (error) {
     console.error("Error fetching available drivers:", error);
     res.status(500).json({ error: "Server Error" });
@@ -17,14 +27,28 @@ router.get("/availabledrivers", async (req, res) => {
 
 // Handle ride request from passenger
 router.post("/askride/:driverId", async (req, res) => {
-  const { source, destination } = req.body;
+  const { source, destination, passengerId } = req.body;
   const driverId = req.params.driverId;
   try {
-    // Handle the ride request logic (e.g., save the request in the database, notify the driver)
-    // This is just a placeholder
-    res.json({ message: "Ride request sent successfully" });
+    // Create a new ride request instance
+    const newRideRequest = new RideRequest({
+      source,
+      destination,
+      driverId,
+      passengerId,
+    });
+
+    // Save the ride request to the database
+    await newRideRequest.save();
+
+    // Send a success response
+    res.status(201).json({
+      message: "Ride request sent successfully",
+      rideRequest: newRideRequest,
+    });
   } catch (error) {
-    console.error("Error requesting ride:", error);
+    console.error("Error sending ride request:", error);
+    // Send an error response
     res.status(500).json({ error: "Server Error" });
   }
 });
