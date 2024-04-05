@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import GeneralContext from "../context/GeneralContext";
+import { auth, provider } from "./config";
+import { signInWithPopup } from "firebase/auth";
 
 const colors = {
   primary: "#9BCF53",
@@ -15,13 +17,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password } = credentials;
-    const payload = {
-      email,
-      password,
-    };
+  const LogIn = async (payload) => {
     const response = await fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
@@ -47,6 +43,28 @@ const Login = () => {
     } else {
       console.log("Invalid credentials");
     }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, password } = credentials;
+    const payload = {
+      email,
+      password,
+    };
+    await LogIn(payload);
+  };
+
+  const handleGoogleClick = async () => {
+    signInWithPopup(auth, provider).then(async (data) => {
+      const email = data.user.email;
+      const password = data.user.uid;
+
+      const payload = {
+        email,
+        password,
+      };
+      await LogIn(payload);
+    });
   };
 
   const onChange = (e) => {
@@ -192,6 +210,7 @@ const Login = () => {
                       <a
                         href="#"
                         className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                        onClick={handleGoogleClick}
                       >
                         <img
                           className="h-6 w-6"
