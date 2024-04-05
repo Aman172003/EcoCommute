@@ -10,7 +10,6 @@ const colors = {
   background: "#BFEA7C",
   disabled: "#D9D9D9",
 };
-
 const Login = () => {
   const context = useContext(GeneralContext);
   const { getLeaderboardData } = context;
@@ -180,32 +179,7 @@ const Login = () => {
                       <span className="px-2 bg-gray-100 text-gray-500">Or</span>
                     </div>
                   </div>
-
-                  <div className="mt-6 grid grid-cols-3 gap-3">
-                    <div>
-                      <a
-                        href="#"
-                        className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                      >
-                        <img
-                          className="h-5 w-5"
-                          src="https://www.svgrepo.com/show/512120/facebook-176.svg"
-                          alt=""
-                        />
-                      </a>
-                    </div>
-                    <div>
-                      <a
-                        href="#"
-                        className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                      >
-                        <img
-                          className="h-5 w-5"
-                          src="https://www.svgrepo.com/show/513008/twitter-154.svg"
-                          alt=""
-                        />
-                      </a>
-                    </div>
+                  <div className="mt-6 grid grid-cols-1 gap-3">
                     <div>
                       <a
                         href="#"
@@ -217,6 +191,7 @@ const Login = () => {
                           src="https://www.svgrepo.com/show/506498/google.svg"
                           alt=""
                         />
+                        <span className="ml-2">Sign in with Google</span>
                       </a>
                     </div>
                   </div>

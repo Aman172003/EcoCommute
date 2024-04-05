@@ -342,6 +342,7 @@ const Signup = () => {
                       src="https://www.svgrepo.com/show/506498/google.svg"
                       alt=""
                     />
+                    <span className="ml-2">Sign in with Google</span>
                   </a>
                 </div>
               </div>
