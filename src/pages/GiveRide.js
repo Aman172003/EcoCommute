@@ -35,8 +35,8 @@
 //     if (!originRef.current.value || !destinationRef.current.value) {
 //       return;
 //     }
-  
-//     const directionsService = new window.google.maps.DirectionsService(); 
+
+//     const directionsService = new window.google.maps.DirectionsService();
 //     directionsService.route(
 //       {
 //         origin: originRef.current.value,
@@ -46,15 +46,14 @@
 //       (result, status) => {
 //         if (status === 'OK') {
 //           setDirectionsResponse(result);
-//           setDistance(result.routes[0].legs[0].distance.text); 
+//           setDistance(result.routes[0].legs[0].distance.text);
 //           setDuration(result.routes[0].legs[0].duration.text);
 //         } else {
-//           console.error('Directions request failed due to ' + status); 
+//           console.error('Directions request failed due to ' + status);
 //         }
 //       }
 //     );
 //   }
-  
 
 //   return (
 //     <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
@@ -75,48 +74,75 @@
 
 // export default App;
 
-
-
-
 import React, { useState } from "react";
 
 const GiveRide = () => {
   const host = "http://localhost:5000";
-    const [vehicle, setVehicle] = useState("");
-    const [seats, setSeats] = useState("");
-    const [source, setSource] = useState("");
-    const [destination, setDestination] = useState("");
+  const [vehicle, setVehicle] = useState("");
+  const [seats, setSeats] = useState("");
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log("Submitting ride offer...");
-        try {
-            const response = await fetch(`${host}/driver/giveride`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ vehicle, seats, source, destination }),
-            });
-            console.log("Response:", response);
-            // Handle response as needed
-        } catch (error) {
-            console.error("Error giving ride:", error);
-        }
-    };
+  const giveride = async (vehicle, seats, source, destination) => {
+    try {
+      const response = await fetch(`${host}/driver/giveride`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // "auth-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({ vehicle, seats, source, destination }),
+      });
 
-    return (
-        <div className="h-screen">
-            <h2>Give Ride</h2>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Vehicle" value={vehicle} onChange={(e) => setVehicle(e.target.value)} />
-                <input type="number" placeholder="Seats" value={seats} onChange={(e) => setSeats(e.target.value)} />
-                <input type="text" placeholder="Source" value={source} onChange={(e) => setSource(e.target.value)} />
-                <input type="text" placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} />
-                <button type="submit">Offer Ride</button>
-            </form>
-        </div>
-    );
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData.message);
+      } else {
+        console.error("Error giving ride:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error giving ride:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submitting ride offer...");
+    giveride(vehicle, seats, source, destination);
+  };
+
+  return (
+    <div className="h-screen">
+      <h2>Give Ride</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Vehicle"
+          value={vehicle}
+          onChange={(e) => setVehicle(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Seats"
+          value={seats}
+          onChange={(e) => setSeats(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Source"
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Destination"
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+        />
+        <button type="submit">Offer Ride</button>
+      </form>
+    </div>
+  );
 };
 
 export default GiveRide;

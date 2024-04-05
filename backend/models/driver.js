@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const DriverSchema = new Schema({
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "user",
-  // },
-  // passenger: {
-  //   type: mongoose.Schema.Types.ObjectId,
-    // ref: "passenger",
-  // },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
+  passenger: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "passenger",
+  },
   // Dname: {
   //   type: String,
   //   required: true,
@@ -23,22 +23,22 @@ const DriverSchema = new Schema({
     required: true,
   },
   source: {
-    type: {
-      type: String,
-      // enum: ["Point"],
-      required: true,
-    },
+    // type: {
+    type: String,
+    // enum: ["Point"],
+    required: true,
+    // },
     // coordinates: {
     //   type: [Number],
     //   required: true,
     // },
   },
   destination: {
-    type: {
-      type: String,
-      // enum: ["Point"],
-      required: true,
-    },
+    // type: {
+    type: String,
+    // enum: ["Point"],
+    required: true,
+    // },
     // coordinates: {
     //   type: [Number],
     //   required: true,
@@ -54,10 +54,10 @@ const DriverSchema = new Schema({
   //     // enum: ["Point"],
   //     required: true,
   //   },
-    // coordinates: {
-    //   type: [Number],
-    //   required: true,
-    // },
+  // coordinates: {
+  //   type: [Number],
+  //   required: true,
+  // },
   // },
 });
 
