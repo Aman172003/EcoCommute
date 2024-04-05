@@ -41,10 +41,14 @@ router.post("/askride/:driverId", async (req, res) => {
     // Save the ride request to the database
     await newRideRequest.save();
 
-    // Send a success response
+    // Fetch all ride requests made to this driver
+    const allRequestsToDriver = await RideRequest.find({ driverId });
+
+    // Send a success response with the newly created ride request and all requests to the driver
     res.status(201).json({
       message: "Ride request sent successfully",
       rideRequest: newRideRequest,
+      allRequestsToDriver,
     });
   } catch (error) {
     console.error("Error sending ride request:", error);
