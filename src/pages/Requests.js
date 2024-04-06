@@ -97,6 +97,12 @@ const Requests = () => {
               zoom={12}
               mapContainerStyle={{ height: "100%", width: "100%" }}
               onLoad={setMap}
+              options={{
+                zoomControl:false,
+                streetViewControl:false,
+                mapTypeControl:false,
+                fullScreenControl:false,
+              }}
             >
               {directions && <DirectionsRenderer directions={directions} />}
               {rideRequests.map((request) => (
