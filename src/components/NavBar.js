@@ -177,7 +177,7 @@ const Navbar = () => {
       </div>
       {isOpen && (
         <div className="lg:hidden" id="mobile-menu">
-          <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="px-4 pt-2 pb-3 space-y-2">
             <Link
               to="/route-recommendation"
               className="text-gray-900 hover:text-green-600 text-base font-medium block"
