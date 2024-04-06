@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import GeneralContext from "../context/GeneralContext";
 import { auth, provider } from "./config";
 import { signInWithPopup } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const colors = {
   primary: "#9BCF53",

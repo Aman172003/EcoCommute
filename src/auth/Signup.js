@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import GeneralContext from "../context/GeneralContext";
@@ -73,6 +74,7 @@ const Signup = () => {
       password,
     };
     await SignIn(payload);
+    toast.success("Congratulations, You have earned 15 EcoCoins");
   };
 
   const handleGoogleClick = async () => {
@@ -87,6 +89,7 @@ const Signup = () => {
         password,
       };
       await SignIn(payload);
+      toast.success("Congratulations, You have earned 15 EcoCoins");
     });
   };
   // useEffect(() => {

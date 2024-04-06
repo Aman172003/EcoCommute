@@ -3,6 +3,7 @@ import HostModal from "../components/HostModal";
 import GeneralContext from "../context/GeneralContext";
 import EditModal from "../components/EditModal";
 import Comments from "./Comments";
+import toast from "react-hot-toast";
 
 const Community = () => {
   const context = useContext(GeneralContext);
@@ -12,12 +13,14 @@ const Community = () => {
     addSupporter,
     setCampaigns,
     deleteCampaign,
+    setLeaderboardData,
   } = context;
 
   const [currentCampaign, setCurrentCampaign] = useState(null); // State to store the current campaign being edited
 
   const handleJoinCampaign = async (id) => {
     if (!localStorage.getItem("token")) {
+      // Show a message if user is not signed in
       const overlay = document.createElement("div");
       overlay.style.position = "fixed";
       overlay.style.top = "0";
@@ -33,7 +36,11 @@ const Community = () => {
       document.body.appendChild(overlay);
       return;
     }
+
+    // Call addSupporter function to join or unjoin the campaign
     const updatedCampaign = await addSupporter(id);
+
+    // Update the campaigns state with the updated campaign
     const updatedCampaigns = campaigns.map((campaign) => {
       if (campaign._id === updatedCampaign._id) {
         return updatedCampaign;
@@ -41,6 +48,26 @@ const Community = () => {
       return campaign;
     });
     setCampaigns(updatedCampaigns);
+
+    // Show a success toast if user successfully joins the campaign
+    if (updatedCampaign.supporters.includes(localStorage.getItem("id"))) {
+      const temp = await setLeaderboardData(localStorage.getItem("name"), 20);
+      const updatedData = await temp.find(
+        (entry) => entry.user === localStorage.getItem("id")
+      );
+      const userCoins = updatedData.coins;
+      localStorage.setItem("coins", userCoins);
+      toast.success("Congratulations! You have earned 20 EcoCoins");
+    } else {
+      const temp = await setLeaderboardData(localStorage.getItem("name"), -20);
+      const updatedData = await temp.find(
+        (entry) => entry.user === localStorage.getItem("id")
+      );
+      const userCoins = updatedData.coins;
+      localStorage.setItem("coins", userCoins);
+      // Show an error toast if user unjoins the campaign
+      toast.error("Oops! You have lost 20 EcoCoins");
+    }
   };
 
   useEffect(() => {
@@ -82,6 +109,17 @@ const Community = () => {
   const handleEditCampaign = (campaign) => {
     setCurrentCampaign(campaign);
     editToggleModal();
+  };
+
+  const handleDeleteCampaign = async (campaignId) => {
+    deleteCampaign(campaignId);
+    const temp = await setLeaderboardData(localStorage.getItem("name"), -50);
+    const updatedData = await temp.find(
+      (entry) => entry.user === localStorage.getItem("id")
+    );
+    const userCoins = updatedData.coins;
+    localStorage.setItem("coins", userCoins);
+    toast.error("Ohh! You have lost 50 EcoCoins");
   };
 
   function formatDate(dateString) {
@@ -169,7 +207,9 @@ const Community = () => {
                   <div>
                     {/* Icon for deleting */}
                     {localStorage.getItem("id") === campaign.user && (
-                      <button onClick={() => deleteCampaign(campaign._id)}>
+                      <button
+                        onClick={() => handleDeleteCampaign(campaign._id)}
+                      >
                         <i className="fas fa-trash text-green-800 hover:text-green-700"></i>
                       </button>
                     )}

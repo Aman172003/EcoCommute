@@ -20,6 +20,7 @@ import GiveRide from "./pages/GiveRide";
 import AskForRide from "./pages/AskForRide";
 import AvailableDrivers from "./pages/AvailableDrivers";
 import Requests from "./pages/Requests";
+import { Toaster } from "react-hot-toast";
 
 // Custom component to control the visibility of Navbar and Footer
 function NavigationControl() {
@@ -53,8 +54,16 @@ function NavigationControl() {
 }
 
 function App() {
+  const createToast = {
+    success: {
+      theme: {
+        primary: "#09fcf6",
+      },
+    },
+  };
   return (
     <GeneralState>
+      <Toaster position="top-right" toastOptions={createToast}></Toaster>
       <Router>
         <NavigationControl />
       </Router>

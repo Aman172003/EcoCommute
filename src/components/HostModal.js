@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import GeneralContext from "../context/GeneralContext";
+import toast from "react-hot-toast";
 
 const HostModal = ({ isModalOpen, toggleModal }) => {
   const refClose = useRef(null);
   const context = useContext(GeneralContext);
-  const { addCampaign } = context;
+  const { addCampaign, setLeaderboardData } = context;
 
   const [campaign, setCampaign] = useState({
     title: "",
@@ -13,7 +14,7 @@ const HostModal = ({ isModalOpen, toggleModal }) => {
     description: "",
   });
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     if (campaign.address.length >= 10 && campaign.description.length >= 10) {
       refClose.current.click();
@@ -29,6 +30,13 @@ const HostModal = ({ isModalOpen, toggleModal }) => {
         address: "",
         description: "",
       });
+      const temp = await setLeaderboardData(localStorage.getItem("name"), 50);
+      const updatedData = await temp.find(
+        (entry) => entry.user === localStorage.getItem("id")
+      );
+      const userCoins = updatedData.coins;
+      localStorage.setItem("coins", userCoins);
+      toast.success("Congratulations, You have earned 50 EcoCoins");
     } else {
       console.log("description and adress length must be greater than 10");
     }
