@@ -74,15 +74,18 @@
 
 // export default App;
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import driver from "../assets/driver.jpg";
+import { useNavigate } from "react-router-dom";
 
 const GiveRide = () => {
+  const navigate = useNavigate();
   const host = "http://localhost:5000";
   const [vehicle, setVehicle] = useState("");
   const [seats, setSeats] = useState("");
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
+  const [driverId, setDriverId] = useState(null);
 
   const giveride = async (vehicle, seats, source, destination) => {
     try {
@@ -90,7 +93,7 @@ const GiveRide = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // "auth-token": localStorage.getItem("token"),
+          "auth-token": localStorage.getItem("token"),
         },
         body: JSON.stringify({ vehicle, seats, source, destination }),
       });
@@ -98,6 +101,7 @@ const GiveRide = () => {
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData.message);
+        setDriverId(responseData.driverId);
       } else {
         console.error("Error giving ride:", response.statusText);
       }
@@ -106,10 +110,23 @@ const GiveRide = () => {
     }
   };
 
+  useEffect(() => {
+    if (driverId) {
+      navigate("/requests", {
+        state: { driverId },
+      });
+    }
+  }, [driverId, navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting ride offer...");
-    giveride(vehicle, seats, source, destination);
+    await giveride(vehicle, seats, source, destination);
+    if (driverId) {
+      navigate("/requests", {
+        state: { driverId },
+      });
+    }
   };
 
   return (
