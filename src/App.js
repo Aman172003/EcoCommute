@@ -18,6 +18,7 @@ import Leaderboard from "./pages/Leaderboard";
 import GeneralState from "./context/GeneralState";
 import GiveRide from "./pages/GiveRide";
 import AskForRide from "./pages/AskForRide";
+import AvailableDrivers from "./pages/AvailableDrivers";
 
 // Custom component to control the visibility of Navbar and Footer
 function NavigationControl() {
@@ -34,6 +35,7 @@ function NavigationControl() {
         <Route path="/car-pooling" element={<Carpooling />} />
         <Route path="/car-pooling/giveride" element={<GiveRide />} />
         <Route path="/car-pooling/askforride" element={<AskForRide />} />
+        <Route path="/car-pooling/askforride/availabledrivers" element={<AvailableDrivers/>} />
         <Route path="/redeem" element={<Redeem />} />
         <Route path="/community" element={<Community />} />
         <Route path="/signup" element={<Signup />} />
