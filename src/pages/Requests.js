@@ -18,6 +18,8 @@ const Requests = () => {
   const [error, setError] = useState("");
   const [map, setMap] = useState(null);
   const [directions, setDirections] = useState(null);
+  const [distance, setDistance] = useState('')
+  const [duration, setDuration] = useState('')
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyCdiugRD3AtoVHnc3_mbEyUYSCIItI9DcQ",
@@ -59,6 +61,8 @@ const Requests = () => {
         (result, status) => {
           if (status === "OK") {
             setDirections(result);
+            setDistance(result.routes[0].legs[0].distance.text); // Set distance
+          setDuration(result.routes[0].legs[0].duration.text); // Set duration
           } else {
             console.error("Directions request failed due to " + status);
           }
@@ -66,6 +70,7 @@ const Requests = () => {
       );
     }
   }, [rideRequests, isLoaded]);
+  
 
   return (
     <div className="container mx-2 mt-8 px-4">
@@ -114,6 +119,10 @@ const Requests = () => {
             </GoogleMap>
           </div>
         )}
+      </div>
+      <div>
+      <span>Distance: {distance} </span>
+        <span>Duration: {duration} </span>
       </div>
     </div>
   );
