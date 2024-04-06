@@ -5,11 +5,13 @@ import { useLocation } from "react-router-dom";
 const AskForRide = () => {
   const host = "http://localhost:5000";
   const location = useLocation();
-  const [source, setSource] = useState("");
-  const [destination, setDestination] = useState("");
+  //   const [source, setSource] = useState("");
+  //   const [destination, setDestination] = useState("");
 
   const drivers = location.state?.drivers;
   const passengerId = location.state?.passengerId;
+  const source = location.state?.source;
+  const destination = location.state?.destination;
 
   const handleRequestRide = async (driverId) => {
     try {

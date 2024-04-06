@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import passenger from "../assets/passenger.jpg";
 import { useNavigate } from "react-router-dom";
 
@@ -11,43 +11,47 @@ const AskForRide = () => {
   const [drivers, setDrivers] = useState([]);
   const [passengerId, setPassengerId] = useState([]);
 
-  const availableDrivers = async () => {
-    const url = new URL(`${host}/driver/availabledrivers`);
-    url.searchParams.append("source", source);
-    url.searchParams.append("destination", destination);
-    try {
-      const response = await fetch(url.toString(), {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token"),
-        },
-      });
+  useEffect(() => {
+    const fetchDrivers = async () => {
+      const url = new URL(`${host}/driver/availabledrivers`);
+      url.searchParams.append("source", source);
+      url.searchParams.append("destination", destination);
 
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log(responseData);
-        setDrivers(responseData.availableDrivers);
-        console.log(responseData.newPassenger);
-        console.log(responseData.newPassenger._id);
-        setPassengerId(passengerId);
-        passengerId = responseData.newPassenger._id;
-      } else {
-        console.error("Error fetching drivers:", response.statusText);
+      try {
+        const response = await fetch(url.toString(), {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+          },
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          setDrivers(responseData.availableDrivers);
+          setPassengerId(responseData.newPassenger._id);
+        } else {
+          console.error("Error fetching drivers:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching drivers:", error);
       }
-    } catch (error) {
-      console.error("Error fetching drivers:", error);
+    };
+
+    if (source.trim() !== "" && destination.trim() !== "") {
+      fetchDrivers();
     }
-  };
+  }, [source, destination]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (source.trim() !== "" && destination.trim() !== "") {
-      console.log("Form submitted:", { source, destination });
-      await availableDrivers();
+      console.log("Form submitted:", { source, destination, passengerId });
+      //   await availableDrivers();
+      console.log(drivers);
       navigate("/car-pooling/askforride/availabledrivers", {
-        state: { drivers, passengerId },
+        state: { drivers, passengerId, source, destination },
       });
     } else {
       alert("Please fill in both source and destination fields.");
