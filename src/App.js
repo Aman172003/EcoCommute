@@ -63,7 +63,7 @@ function App() {
   };
   return (
     <GeneralState>
-      <Toaster position="top-right" toastOptions={createToast}></Toaster>
+      <Toaster position="top-center" toastOptions={createToast}></Toaster>
       <Router>
         <NavigationControl />
       </Router>

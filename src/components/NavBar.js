@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Navbar = () => {
   }, []);
 
   const handleSignOut = () => {
-    console.log("Signed out:", name);
+    toast.success("Successfully, Signed Out");
     localStorage.removeItem("token");
     localStorage.removeItem("name");
     localStorage.removeItem("id");
@@ -52,7 +53,7 @@ const Navbar = () => {
           </div>
           <div className="hidden lg:flex lg:items-center lg:justify-end">
             <div className="ml-10 flex items-baseline space-x-4">
-              <Link
+              {/* <Link
                 to="/route-recommendation"
                 className={`${
                   selectedLink === "/route-recommendation"
@@ -62,7 +63,7 @@ const Navbar = () => {
                 onClick={() => handleLinkClick("/route-recommendation")}
               >
                 Route Recommendation
-              </Link>
+              </Link> */}
               <Link
                 to="/car-pooling"
                 className={`${

@@ -2,16 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 /* index.css or any other CSS file */
-@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap"); */
+* {
+  font-family: "Anek Telugu", sans-serif;
+}
 .arimo-regular {
-  font-family: "Arimo", sans-serif;
+  font-family: "Anek Telugu", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400; /* Regular weight */
   font-style: normal;
 }
 
 .arimo-medium {
-  font-family: "Arimo", sans-serif;
+  font-family: "Anek Telugu", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -28,7 +31,7 @@
   background-image: linear-gradient(to right, #8feafe, #a5ff6f);
   color: #173308;
   font-weight: bold;
-  font-family: "Arimo", sans-serif; /* Use Arimo font */
+  font-family: "Anek Telugu", sans-serif; /* Use Arimo font */
   font-size: 1rem;
   border-radius: 0.375rem;
   cursor: pointer;

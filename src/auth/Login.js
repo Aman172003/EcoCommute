@@ -38,10 +38,10 @@ const Login = () => {
       const userCoins = userEntry.coins;
       localStorage.setItem("coins", userCoins);
       console.log(localStorage.getItem("coins"));
-      console.log("Successfully logged In:");
+      toast.success(`Welcome ${json.name}`);
       navigate("/");
     } else {
-      console.log("Invalid credentials");
+      toast.error(`${json.error}`);
     }
   };
   const handleSubmit = async (e) => {
@@ -82,7 +82,7 @@ const Login = () => {
     <div className="w-full flex h-screen items-center justify-center">
       {/* LEFT CONTENT */}
       <div
-        className=" w-1/2 h-screen hidden md:block overflow-hidden"
+        className="w-1/2 h-screen hidden md:block overflow-hidden"
         style={leftHalfStyle}
       >
         <div className="flex flex-row items-center justify-center h-screen">
@@ -102,8 +102,8 @@ const Login = () => {
       </div>
 
       {/* {RIGHT CONTENT} */}
-      <div className="flex w-screen md:w-1/2  h-screen flex-col align-middle items-center justify-center bg-gray-100">
-        <div className="overflow-auto">
+      <div className="flex w-screen md:w-1/2 h-screen flex-col align-middle items-center justify-center bg-gray-100">
+        <div className="overflow-auto w-full max-w-md">
           <div className="flex flex-col justify-center items-center py-8 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center sm:mx-auto sm:w-full sm:max-w-md">
               <h2 className="mt-8 text-center text-2xl font-bold text-gray-900">
@@ -114,7 +114,10 @@ const Login = () => {
               </p>
             </div>
             <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
-              <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+              <div
+                className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10"
+                style={{ width: "400px" }}
+              >
                 <form
                   className="space-y-6"
                   action="#"

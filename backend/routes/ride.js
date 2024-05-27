@@ -103,4 +103,46 @@ router.get("/riderequests/:driverId", async (req, res) => {
   }
 });
 
+router.delete("/driver/:driverId", fetchUser, async (req, res) => {
+  try {
+    let driver = await Driver.findById(req.params.driverId);
+    if (!driver) {
+      return res.status(404).send("NOT FOUND");
+    }
+    driver = await Driver.findByIdAndDelete(req.params.driverId);
+    res.json({ Success: "Driver has been deleted" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.delete("/passenger/:passengerId", fetchUser, async (req, res) => {
+  try {
+    let passenger = await Driver.findById(req.params.passengerId);
+    if (!passenger) {
+      return res.status(404).send("NOT FOUND");
+    }
+    passenger = await Passenger.findByIdAndDelete(req.params.passengerId);
+    res.json({ Success: "Passenger has been deleted" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.delete("/request/:id", fetchUser, async (req, res) => {
+  try {
+    let request = await RideRequest.findById(req.params.id);
+    if (!request) {
+      return res.status(404).send("NOT FOUND");
+    }
+    request = await Request.findByIdAndDelete(req.params.id);
+    res.json({ Success: "Request has been deleted" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 module.exports = router;

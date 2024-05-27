@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import passenger from "../assets/passenger.jpg";
 import { useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AskForRide = () => {
   const host = "http://localhost:5000";
   const location = useLocation();
-  //   const [source, setSource] = useState("");
-  //   const [destination, setDestination] = useState("");
 
   const drivers = location.state?.drivers;
   const passengerId = location.state?.passengerId;
   const source = location.state?.source;
   const destination = location.state?.destination;
+
+  // State to keep track of drivers to whom ride requests have been sent
+  const [requestedDrivers, setRequestedDrivers] = useState([]);
 
   const handleRequestRide = async (driverId) => {
     try {
@@ -19,7 +21,7 @@ const AskForRide = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token"), // Assuming you have an authentication token
+          "auth-token": localStorage.getItem("token"),
         },
         body: JSON.stringify({
           source,
@@ -29,7 +31,10 @@ const AskForRide = () => {
       });
 
       if (response.ok) {
+        // Update requestedDrivers state to include the driverId
+        setRequestedDrivers([...requestedDrivers, driverId]);
         console.log("Ride request sent successfully", response);
+        toast.success("Ride request sent successfully");
       } else {
         console.error("Error sending ride request:", response.statusText);
       }
@@ -59,8 +64,11 @@ const AskForRide = () => {
                 <button
                   onClick={() => handleRequestRide(driver._id)}
                   className="px-4 py-2 bg-green-800 text-white rounded-lg hover:bg-green-700"
+                  disabled={requestedDrivers.includes(driver._id)} // Disable button if ride request already sent
                 >
-                  Request Ride
+                  {requestedDrivers.includes(driver._id)
+                    ? "Request Sent"
+                    : "Request Ride"}
                 </button>
               </div>
             </li>

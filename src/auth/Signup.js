@@ -36,7 +36,7 @@ const Signup = () => {
     });
     const json = await response.json();
     console.log(json);
-    if (json.success) {
+    if (json.success === true) {
       //save the auth token and redirect
       localStorage.setItem("token", json.authToken);
       localStorage.setItem("name", json.name);
@@ -57,8 +57,9 @@ const Signup = () => {
       console.log(localStorage.getItem("coins"));
       console.log("Successfully Signed In:");
       navigate("/");
+      toast.success(`Welcome ${json.name}, You have earned 15 EcoCoins`);
     } else {
-      console.log("Invalid Credentials");
+      toast.error(json.error);
     }
   };
 
@@ -74,7 +75,6 @@ const Signup = () => {
       password,
     };
     await SignIn(payload);
-    toast.success("Congratulations, You have earned 15 EcoCoins");
   };
 
   const handleGoogleClick = async () => {
@@ -89,7 +89,7 @@ const Signup = () => {
         password,
       };
       await SignIn(payload);
-      toast.success("Congratulations, You have earned 15 EcoCoins");
+      toast.success(`Welcome ${name}, You have earned 15 EcoCoins`);
     });
   };
   // useEffect(() => {
@@ -345,7 +345,7 @@ const Signup = () => {
                       src="https://www.svgrepo.com/show/506498/google.svg"
                       alt=""
                     />
-                    <span className="ml-2">Sign in with Google</span>
+                    <span className="ml-2">Sign up with Google</span>
                   </a>
                 </div>
               </div>
